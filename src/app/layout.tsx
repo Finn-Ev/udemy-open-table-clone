@@ -1,6 +1,10 @@
 import { Metadata } from 'next';
 import './globals.css';
 
+export const metadata: Metadata = {
+  title: 'Restaurant App',
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -8,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={"w-f"}>{children}</body>
     </html>
   );
 }
