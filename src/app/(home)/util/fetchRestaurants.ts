@@ -1,8 +1,8 @@
-import { Cuisine, Location, PRICE, PrismaClient, Review } from '@prisma/client';
-import { prisma } from '../../../../prisma/client';
+import { Cuisine, Location, PRICE, PrismaClient, Review } from "@prisma/client";
+import { prisma } from "../../../../prisma/client";
 
 // custom type to retrieve only the data we need
-export interface RestaurantCardDataType {
+export interface IRestaurantCardData {
   id: number;
   name: string;
   main_image: string;
@@ -13,9 +13,7 @@ export interface RestaurantCardDataType {
   reviews: Review[];
 }
 
-export default async function fetchRestaurants(): Promise<
-  RestaurantCardDataType[]
-> {
+export default async function fetchRestaurants(): Promise<IRestaurantCardData[]> {
   const restaurants = await prisma.restaurant.findMany({
     select: {
       id: true,

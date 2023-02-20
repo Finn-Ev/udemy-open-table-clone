@@ -1,11 +1,11 @@
-import { PRICE } from '@prisma/client';
-import Image from 'next/image';
-import Link from 'next/link';
-import { RestaurantCardDataType } from '../util/fetchRestaurants';
-import Price from './Price';
+import { PRICE } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
+import { IRestaurantCardData } from "../util/fetchRestaurants";
+import Price from "./Price";
 
 interface Props {
-  restaurant: RestaurantCardDataType;
+  restaurant: IRestaurantCardData;
 }
 
 export default function RestaurantCard({ restaurant }: Props) {
@@ -13,12 +13,7 @@ export default function RestaurantCard({ restaurant }: Props) {
     <div className="rounded overflow-hidden border cursor-pointer">
       <Link href={`/restaurant/${restaurant.slug}`}>
         <div className="h-32 relative">
-          <Image
-            src={restaurant.main_image}
-            alt={restaurant.name}
-            fill
-            style={{ objectFit: 'cover' }}
-          />
+          <Image src={restaurant.main_image} alt={restaurant.name} fill style={{ objectFit: "cover" }} />
         </div>
         <div className="p-1">
           <h3 className="font-bold text-2xl mb-2">{restaurant.name}</h3>
