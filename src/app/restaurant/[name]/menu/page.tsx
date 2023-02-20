@@ -1,25 +1,25 @@
-import NavBar from '../../../(home)/components/NavBar';
-import Header from './components/Header';
+import { Metadata } from 'next';
+import RestaurantNavBar from '../components/RestaurantNavBar';
 import Menu from './components/Menu';
-import RestaurantNavBar from './components/RestaurantNavBar';
+import fetchMenuItems from './util/fetchMenuItems';
 
-function RestaurantMenuPage() {
+export const metadata: Metadata = {
+  title: 'Menu',
+};
+
+interface Props {
+  params: { name: string };
+}
+
+export default async function RestaurantMenuPage({ params }: Props) {
+  const menuItems = await fetchMenuItems(params.name);
+
+  if (menuItems === null) return <div>404</div>;
+
   return (
-    <div>
-      <main className="bg-gray-100 min-h-screen w-screen">
-        <main className="max-w-screen-2xl m-auto bg-white">
-          <NavBar />
-          <Header />
-          <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">
-            <div className="bg-white w-[100%] rounded p-3 shadow">
-              <RestaurantNavBar />
-              <Menu />
-            </div>
-          </div>
-        </main>
-      </main>
+    <div className="bg-white w-[100%] rounded p-3 shadow">
+      <RestaurantNavBar slug={params.name} />
+      <Menu menuItems={menuItems} />
     </div>
   );
 }
-
-export default RestaurantMenuPage;

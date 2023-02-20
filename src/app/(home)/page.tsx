@@ -1,25 +1,17 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
 import Header from './components/Header';
-import NavBar from './components/NavBar';
 import RestaurantCard from './components/RestaurantCard';
+import fetchRestaurants from './util/fetchRestaurants';
 
-export const metadata: Metadata = {
-  title: 'OpenTable',
-};
-
-export default function Home() {
+export default async function Home() {
+  const restaurants = await fetchRestaurants();
   return (
-    <main className="bg-gray-100 min-h-screen w-screen">
-      <div className="max-w-screen-2xl m-auto bg-white">
-        <NavBar />
-        <div>
-          <Header />
-          <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
-            <RestaurantCard />
-          </div>
-        </div>
+    <>
+      <Header />
+      <div className="py-3 grid grid-cols-4 gap-5 px-36 mt-10">
+        {restaurants.map(restaurant => (
+          <RestaurantCard restaurant={restaurant} key={restaurant.id} />
+        ))}
       </div>
-    </main>
+    </>
   );
 }
