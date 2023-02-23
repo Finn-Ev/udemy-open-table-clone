@@ -25,10 +25,8 @@ export default function ReservationCard() {
             </select>
           </div>
         </div>
-        <div className="mt-5">
-          <button className="bg-red-600 rounded w-full px-4 text-white font-bold h-16">
-            Find a Time
-          </button>
+        <div className="mt-3">
+          <button className="bg-red-600 rounded w-full px-4 text-white font-bold h-16 mb-10">Find a Time</button>
         </div>
       </div>
     </div>

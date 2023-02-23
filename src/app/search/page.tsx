@@ -1,5 +1,6 @@
 import SearchSideBar from "./components/SearchSideBar";
-import { Metadata } from "next";
+// @ts-ignore
+import type { Metadata } from "next";
 import SearchBar from "../(home)/components/SearchBar";
 import RestaurantList from "./components/RestaurantList";
 import fetchRestaurantsByCity from "./util/fetchRestaurantsByLocation";
@@ -29,6 +30,7 @@ export default async function SearchPage({ searchParams }: Props) {
         <SearchBar />
       </div>
       <div className="flex py-4 m-auto w-2/3 items-start">
+        {/* @ts-ignore */}
         <SearchSideBar />
         <RestaurantList restaurants={restaurants} location={searchParams.location} />
       </div>
