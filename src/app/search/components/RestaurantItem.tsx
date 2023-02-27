@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Price from "../../(home)/components/Price";
-import { IRestaurantSearchResultItem } from "../util/fetchRestaurantsByLocation";
+import { IRestaurantSearchResultItem } from "../util/fetchRestaurantsBySearchParams";
 
 export default function RestaurantCard({ restaurant }: { restaurant: IRestaurantSearchResultItem }) {
   return (

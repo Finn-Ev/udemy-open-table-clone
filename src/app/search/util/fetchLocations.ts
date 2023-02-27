@@ -4,6 +4,7 @@ export default async function fetchLocations() {
   const locations = await prisma.location.findMany({
     select: {
       name: true,
+      id: true,
     },
   });
 

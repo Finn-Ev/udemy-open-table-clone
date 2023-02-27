@@ -3,17 +3,18 @@ import SearchSideBar from "./components/SearchSideBar";
 import type { Metadata } from "next";
 import SearchBar from "../(home)/components/SearchBar";
 import RestaurantList from "./components/RestaurantList";
-import fetchRestaurantsByCity from "./util/fetchRestaurantsByLocation";
+import fetchRestaurantsBySearchParams from "./util/fetchRestaurantsBySearchParams";
+import { PRICE } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Search",
 };
 
-interface Props {
-  searchParams: { location?: string };
+export interface ISearchPageProps {
+  searchParams: { location?: string; cuisine?: string; price?: PRICE };
 }
 
-export default async function SearchPage({ searchParams }: Props) {
+export default async function SearchPage({ searchParams }: ISearchPageProps) {
   if (!searchParams.location)
     // TODO redirect to home page
     return (
@@ -22,7 +23,7 @@ export default async function SearchPage({ searchParams }: Props) {
       </div>
     );
 
-  const restaurants = await fetchRestaurantsByCity(searchParams.location);
+  const restaurants = await fetchRestaurantsBySearchParams(searchParams);
 
   return (
     <>
@@ -31,7 +32,7 @@ export default async function SearchPage({ searchParams }: Props) {
       </div>
       <div className="flex py-4 m-auto w-2/3 items-start">
         {/* @ts-ignore */}
-        <SearchSideBar />
+        <SearchSideBar searchParams={searchParams} />
         <RestaurantList restaurants={restaurants} location={searchParams.location} />
       </div>
     </>

@@ -1,6 +1,6 @@
 "use client";
 
-import { IRestaurantSearchResultItem } from "../util/fetchRestaurantsByLocation";
+import { IRestaurantSearchResultItem } from "../util/fetchRestaurantsBySearchParams";
 import RestaurantCard from "./RestaurantItem";
 
 export default function RestaurantList({ restaurants, location }: { restaurants: IRestaurantSearchResultItem[]; location: string }) {

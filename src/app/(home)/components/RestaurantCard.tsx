@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IRestaurantCardData } from "../util/fetchRestaurants";
 import Price from "./Price";
+import RatingText from "./RatingText";
 
 interface Props {
   restaurant: IRestaurantCardData;
@@ -20,6 +21,7 @@ export default function RestaurantCard({ restaurant }: Props) {
           <div className="flex items-start">
             <div className="flex mb-2">*****</div>
             <p className="ml-2">{restaurant.reviews.length} reviews</p>
+            <RatingText reviews={restaurant.reviews} />
           </div>
           <div className="flex text-reg font-light capitalize">
             <p className="mr-3">{restaurant.cuisine.name}</p>

@@ -12,14 +12,38 @@ export interface IRestaurantSearchResultItem {
   cuisine: { name: string };
 }
 
-export default async function getRestaurantsByLocation(city: string): Promise<IRestaurantSearchResultItem[]> {
+export default async function fetchRestaurantsBySearchParams(searchParams: {
+  location?: string;
+  cuisine?: string;
+  price?: PRICE;
+}): Promise<IRestaurantSearchResultItem[]> {
+  const conditions = [];
+
+  if (searchParams.location) {
+    conditions.push({
+      location: {
+        name: searchParams.location.toLowerCase(),
+      },
+    });
+  }
+
+  if (searchParams.cuisine) {
+    conditions.push({
+      cuisine: {
+        name: searchParams.cuisine.toLowerCase(),
+      },
+    });
+  }
+
+  if (searchParams.price) {
+    conditions.push({
+      price: searchParams.price,
+    });
+  }
+
   const restaurants = await prisma.restaurant.findMany({
     where: {
-      location: {
-        name: {
-          contains: city.toLowerCase(),
-        },
-      },
+      AND: [...conditions],
     },
     select: {
       id: true,
